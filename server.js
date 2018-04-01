@@ -9,6 +9,7 @@ const getYouTubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
 const request = require('request');
 const fs = require("fs");
+var http = require('http'); 
 const PersistentCollection = require('djs-collection-persistent');       //For prefix
 const guildSettings = new PersistentCollection({name: 'guildSettings'}); //For prefix
 const message_log = new PersistentCollection({name: 'Message_log'}); //For prefix
@@ -28,7 +29,7 @@ const yt_api_key = config.yt_api_key;
 
 client.login(config.token);
 
-
+http.createServer(function (req, res) { res.writeHead(200, {'Content-Type': 'text/plain'}); res.send('it is running\n'); }).listen(process.env.PORT || 5000)
 
 //para ver la ID del canal usar un eval con message.channel.id//
 var botlog;
