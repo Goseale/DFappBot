@@ -1,1 +1,1 @@
-bundle exec js jobs:work
+worker: npm start
