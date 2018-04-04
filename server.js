@@ -1372,7 +1372,7 @@ Time:${message.createdAt}
                 .setColor(65280)
                 .setThumbnail(`${message.author.avatarURL}`)
                 if (hiddenlog) hiddenlog.send({embed: richEmbed});
-                if (hook) hook.send({embed: richEmbed})
+                //if (hook) hook.send({embed: richEmbed})
              }
 // Bot log ---------------------------------------------------------------------------------------------------------------------//
 
