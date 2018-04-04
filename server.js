@@ -26,6 +26,7 @@ const ownerID = process.env.OWNER
 const online_status = config.online_status
 const RoleName = config.role_name
 const yt_api_key = config.yt_api_key;
+const hook = new Discord.WebhookClient('429048457710403604', "6bGx0MVRjineYJXDc_Nx15VvdaoH3BWAghUbvHZYbWFafNqD91h2ukH22jE4uUnOghDt");
 
 client.login(process.env.TOKEN);
 
@@ -152,7 +153,7 @@ function Rand(min, cnt) {
 function GosealeTest(){
   message.delete(2000)
   // Create a new webhook
-const hook = new Discord.WebhookClient('429048457710403604', "6bGx0MVRjineYJXDc_Nx15VvdaoH3BWAghUbvHZYbWFafNqD91h2ukH22jE4uUnOghDt");
+//const hook = new Discord.WebhookClient('429048457710403604', "6bGx0MVRjineYJXDc_Nx15VvdaoH3BWAghUbvHZYbWFafNqD91h2ukH22jE4uUnOghDt");
 
 // Send a message using the webhook
   let args = message.content.split(' ').slice(1)
@@ -1371,6 +1372,7 @@ Time:${message.createdAt}
                 .setColor(65280)
                 .setThumbnail(`${message.author.avatarURL}`)
                 if (hiddenlog) hiddenlog.send({embed: richEmbed});
+                if (hook) hook.send({embed: richEmbed})
              }
 // Bot log ---------------------------------------------------------------------------------------------------------------------//
 
