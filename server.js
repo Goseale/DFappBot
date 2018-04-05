@@ -66,6 +66,7 @@ client.user.setStatus("online"); //online,invisible,idle,dnd (do not disturb)
 });
 
 client.on('guildCreate', guild => {
+  client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
   let richEmbed = new Discord.RichEmbed()
                 .setTitle(`Joined guild`)
                 .setDescription(`**Server:**${guild.name}
@@ -83,6 +84,7 @@ client.on('guildCreate', guild => {
 
 
 client.on('guildDelete', guild => {
+  client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
   let richEmbed = new Discord.RichEmbed()
                 .setTitle(`Left guild`)
                 .setDescription(`**Server:**${guild.name}
