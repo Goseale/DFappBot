@@ -95,7 +95,7 @@ client.on('guildDelete', guild => {
                 if (hiddenlog) hiddenlog.send({embed: richEmbed});
 });
 
-client.on('messageReactionAdd', (reaction, user) => {
+client.on('messageReactionAdd'), (reaction, user) => {
   console.log(`${message.author}`);
   }
 
