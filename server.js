@@ -885,16 +885,6 @@ if (message.content.startsWith(prefix + "unmute")) {
        
        snekfetch.get(api).then(r => {
          if (r.body.status != "success") {return}
-         if (r.body.online = "false") {
-           let richEmbed = new Discord.RichEmbed()
-            .setTitle(`Minecraft server status`)
-        .setDescription(`**IP:**${ip}
-**Online?:**:x: (false)`)
-        .setColor(16711680)
-         
-         message.channel.send({embed: richEmbed})
-           return
-         }
          //console.log(r.body)
          let server = r.body
          
@@ -911,7 +901,7 @@ if (message.content.startsWith(prefix + "unmute")) {
          let richEmbed = new Discord.RichEmbed()
             .setTitle(`Minecraft server status`)
         .setDescription(`**IP:**${ip}
-**Online?:**:white_check_mark: (${server.online})
+**Online?:**${server.online}
 **Motd:**${server.motd}
 **Players:**${server.players.now}/${server.players.max}
 **Version**:${server.server.name}`)
