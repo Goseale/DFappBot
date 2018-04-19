@@ -2,6 +2,7 @@ dependencies:
   algebra: 0.0.2
   algebra.js: 0.2.6
   bufferutil: 3.0.3
+  bzip2: 0.1.1
   discord.js: 11.3.2
   djs-collection-persistent: 0.1.5
   enmap: 2.0.1
@@ -216,6 +217,10 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg=
+  /bzip2/0.1.1:
+    dev: false
+    resolution:
+      integrity: sha1-sNIyvQ8PdQ0gIzBtQKiG7lG5AfQ=
   /caseless/0.12.0:
     dev: false
     resolution:
@@ -1928,6 +1933,7 @@ specifiers:
   algebra: ^0.0.2
   algebra.js: ^0.2.6
   bufferutil: ^3.0.3
+  bzip2: ^0.1.1
   discord.js: ^11.3.2
   djs-collection-persistent: ^0.1.5
   enmap: ^2.0.1

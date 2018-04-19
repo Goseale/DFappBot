@@ -29,7 +29,8 @@
     "youtube-info": "^1.2.0",
     "get-youtube-id": "^1.0.0",
     "request": "^2.85.0",
-    "snekfetch": "^3.6.4"
+    "snekfetch": "^3.6.4",
+    "bzip2": "^0.1.1"
   },
   "engines": {
     "node": "9.x"

@@ -161,12 +161,13 @@ function Rand(min, cnt) {
     
 function GosealeTest(){
   message.delete(2000)
+  message.channel.send("<:Loading:435586369302298624> <:Typing:435586380899549184>");
   // Create a new webhook
 //const hook = new Discord.WebhookClient('429048457710403604', "6bGx0MVRjineYJXDc_Nx15VvdaoH3BWAghUbvHZYbWFafNqD91h2ukH22jE4uUnOghDt");
 
 // Send a message using the webhook
-  let args = message.content.split(' ').slice(1)
-hook.send("**@someone**");
+  //let args = message.content.split(' ').slice(1)
+//hook.send("<:Loading:435586369302298624> <:Typing:435586380899549184>");
 
 }
 //Functions// //End//
