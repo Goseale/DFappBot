@@ -3,6 +3,8 @@ const client = new Discord.Client();
 const config = require("./config.json");
 const settings = require("./settings.json");
 const guildTimers = new Discord.Collection()
+const ffmpeg = require("ffmpeg-static");
+console.log("FFMPEG PATH: " + ffmpeg.path);
 const dispatcher = require('streamdispatch');
 const ytdl          = require('ytdl-core');
 const getYouTubeID = require('get-youtube-id');
