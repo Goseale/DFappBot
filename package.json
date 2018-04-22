@@ -9,6 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "ffmpeg-static": "^2.2.0",
     "algebra": "^0.0.2",
     "bufferutil": "^3.0.3",
     "discord.js": "^11.3.2",
