@@ -1116,6 +1116,7 @@ One command done from my to-do list
           {
               if (message.content.startsWith(prefix + "mplay")) {
               message.delete()
+              const streamOptions = { seek : 0, volume : 0.20}
               let args = message.content.split(' ').slice(1)
               if (!args[0]) return message.channel.send({embed: { title: ":x:Error", "color": 16711680, description: `**${prefix}mplay [Youtube url]**`}}).then(m => {m.delete(15000);})
               if (!message.guild) return;
@@ -1140,7 +1141,7 @@ One command done from my to-do list
                   
           if (botlog) botlog.send(`${message.author.username} has played music in the url \`\`${args.join(' ')}\`\` in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
                   const stream = ytdl(args[0], {filter : 'audioonly'});
-                  const dispatcher = connection.playStream(stream);
+                  const dispatcher = connection.playStream(stream, streamOptions);
         });
               } else {message.reply('You need to join a voice channel first!').then(m => {m.delete(5000)});
           }}}
