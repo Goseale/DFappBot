@@ -1,14 +1,29 @@
-Nconst Discord = require("discord.js");
+const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 const settings = require("./settings.json");
 const guildTimers = new Discord.Collection()
+const ffmpeg = require("ffmpeg-static");
+console.log("FFMPEG PATH: " + ffmpeg.path);
 const dispatcher = require('streamdispatch');
 const ytdl          = require('ytdl-core');
 const getYouTubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
 const request = require('request');
 const fs = require("fs");
+const http = require('http'); 
+
+const express = require('express');
+const app = express();
+app.get("/", (request, response) => {
+  console.log(Date.now() + " Ping Received");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
+
 const PersistentCollection = require('djs-collection-persistent');       //For prefix
 const guildSettings = new PersistentCollection({name: 'guildSettings'}); //For prefix
 const message_log = new PersistentCollection({name: 'Message_log'}); //For prefix
@@ -18,17 +33,19 @@ const defaultSettings = { //For prefix
 const Jimp = require("jimp");
 //const graphic = require("graphic");
 var algebra = require('algebra.js');
+const snekfetch = require('snekfetch');
 var Fraction = algebra.Fraction;
 var Expression = algebra.Expression;
 var Equation = algebra.Equation;
-const ownerID = config.ownerID
+const ownerID = process.env.OWNER
 const online_status = config.online_status
 const RoleName = config.role_name
 const yt_api_key = config.yt_api_key;
+const hook = new Discord.WebhookClient('429048457710403604', "6bGx0MVRjineYJXDc_Nx15VvdaoH3BWAghUbvHZYbWFafNqD91h2ukH22jE4uUnOghDt");
 
-client.login(config.token);
+client.login(process.env.TOKEN);
 
-
+//http.createServer(function (req, res) { res.writeHead(200, {'Content-Type': 'text/plain'}); res.send('it is running\n'); }).listen(process.env.PORT || 5000)
 
 //para ver la ID del canal usar un eval con message.channel.id//
 var botlog;
@@ -64,6 +81,15 @@ client.user.setStatus("online"); //online,invisible,idle,dnd (do not disturb)
 });
 
 client.on('guildCreate', guild => {
+  client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
+  let richEmbed = new Discord.RichEmbed()
+                .setTitle(`Joined guild`)
+                .setDescription(`**Server:**${guild.name}
+**By:**${guild.owner}
+**Member count:**${guild.memberCount}
+**CreatedAt:**${guild.createdAt}`)
+                .setColor(65280)
+                if (hiddenlog) hiddenlog.send({embed: richEmbed});
   if (guild.defaultChannel) guild.defaultChannel.send({
      embed: {
        "color": 13253,
@@ -72,7 +98,17 @@ client.on('guildCreate', guild => {
 });
 
 
-
+client.on('guildDelete', guild => {
+  client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
+  let richEmbed = new Discord.RichEmbed()
+                .setTitle(`Left guild`)
+                .setDescription(`**Server:**${guild.name}
+**By:**${guild.owner}
+**Member count:**${guild.memberCount}
+**CreatedAt:**${guild.createdAt}`)
+                .setColor(16711680)
+                if (hiddenlog) hiddenlog.send({embed: richEmbed});
+});
 
 
 //              Detector de escritura                    //
@@ -84,7 +120,6 @@ client.on("message", (message) => {
   try {
   if (message.author.bot) return;
   if (!message.guild) return message.reply({embed: { title: ":x:Error", "color": 16711680, description: `Can you send that in a guild?`}}).then(m => {m.delete(5000);})
-
 
 
   if (!guildSettings.get(message.guild.id)) guildSettings.set(message.guild.id, defaultSettings); //For prefix
@@ -127,6 +162,15 @@ function Rand(min, cnt) {
 }
     
 function GosealeTest(){
+  message.delete(2000)
+  message.channel.send("<:Loading:435586369302298624> <:Typing:435586380899549184>");
+  // Create a new webhook
+//const hook = new Discord.WebhookClient('429048457710403604', "6bGx0MVRjineYJXDc_Nx15VvdaoH3BWAghUbvHZYbWFafNqD91h2ukH22jE4uUnOghDt");
+
+// Send a message using the webhook
+  //let args = message.content.split(' ').slice(1)
+//hook.send("<:Loading:435586369302298624> <:Typing:435586380899549184>");
+
 }
 //Functions// //End//
     
@@ -149,45 +193,16 @@ function GosealeTest(){
     message.delete(3000)
     if (botlog) botlog.send(`${message.author.username} has requested help in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
     message.channel.send(`\`\`\`html
-<help>           Shows this embed
-<ping>           Tests the delay of the bot
-<invite>         Shows the invitation link of the bot and also the invitation to the bot´s server.
-<say>            Make the bot say something
-<messagebox [Language] [Code]> Send code using a code box
-<embed>          Shows an embed usage [embed [title] [description]
-<test>           Testing command. Avalible for the owner of the bot
-<timer>          Set a timer
-<rng>            Generates a number
-<math>           Do math
-<mplay>          Plays a song from an youtube url
-<msongs>         Shows the list of songs that are avalible
-<mstop>          Stops the music
 \`\`\``)
 message.channel.send(`\`\`\`html
 <Admin> <commands>
 
 
-<spam>              Sends a message 4 times Needs Manage_messages permision
-<purge>             Purge messages min 1,max 100 Needs Manage_messages permision
-<kick @user Reason>  Kick members, = Needs Kick_members permision
-<mute> / <unmute>   Mutes a member and prevents tem to talk, Needs Manage_messages permision
-<warn @user Reason> Warns a user
-<editmessage [ID] [New text]> Edits a message sent by the bot, Needs Manage_messages permision
-<messagepin [Message]> Pins a message with an embed Needs Manage_messages permision
-
 
 <Info> <commands>
 
 
-<info>                           Information about the bot
-<userinfo [@User]  /  userinfo>  Shows information about a user
-<serverInfo>                     Shows information about the server
-<serverRoles>                    Shows the roles of the server
-<serverEmojis>                   Shows the emojis of the server
-<servers>                        Shows the servers that the bot is in
-<uptime>                         Time since the last reboot
-<credits>                        Credits
-<todo>                           my toto list
+
 <suggest>                        Suggest features to the bot
 \`\`\``)
   } else
@@ -288,6 +303,53 @@ message.channel.send(`\`\`\`html
 //
 
 
+    if (message.content.startsWith(prefix + "betaeval")) {
+  if(message.author.id !== ownerID) return message.reply({embed: { title: ":x:Error", "color": 16711680, description: `Tryed to use ${prefix}eval.He/She failed,now He/She is thinking about this bot is so secured :V`}}).then(m => {m.delete(15000);});
+    try {
+      let args = message.content.split(' ').slice(1)
+      var code = args.join(" ");
+      var evaled = eval(code);
+      
+      if (typeof evaled !== "string") {
+        evaled = require('util').inspect(evaled);
+      
+      }
+        evaled.replace(client.token, "[TOKEN]");
+      if (evaled.length >= 2000) {
+        var tooLong = new Discord.RichEmbed()
+        .setTitle(`Whoops! Too long!`)
+        .addField(`${evaled.length} characters!`, "That's past the charcacter limit! You can find the output in the console.");
+        message.channel.send({embed: tooLong});
+        console.log(evaled);
+        return;
+      }
+      const successfulEval = new Discord.RichEmbed()
+      .setTitle("Evaluated successfully")
+      .addField("Input:", `\`\`\`JavaScript\n${code}\`\`\``)
+      .addField("Output:", `\`\`\`JavaScript\n${evaled}\`\`\``)
+      .setColor(0x00ff00)
+      .setFooter("Beta eval")
+      .setTimestamp();
+      message.channel.send({embed: successfulEval});
+    } catch (err) {
+      const failedEval = new Discord.RichEmbed()
+      .setTitle("Error during eval!")
+      .setDescription("An error occured! Please review the code and the error!")
+      .addField("Input:", `\`\`\`JavaScript\n${code}\`\`\``)
+      .addField("Error:", `\`\`\`JavaScript\n${err}\`\`\``)
+      .setColor(0xff0000)
+      .setFooter("Eval Error")
+      .setTimestamp();
+      message.channel.send({embed: failedEval})
+      }
+  }
+    
+    
+    
+    
+    
+    
+    
   if (message.content.startsWith(prefix + "info")) {
     message.delete()
     let ms = client.uptime 
@@ -319,7 +381,6 @@ message.channel.send(`\`\`\`html
   }
 
   if (message.content.startsWith(prefix + "test")) {
-    message.delete();
     if(message.author.id !== ownerID) return message.reply({embed: { title: ":x:Error", "color": 16711680, description: `This command is avalible for the bot owner @Goseale.`}}).then(m => {m.delete(5000);})
     GosealeTest()
 
@@ -787,6 +848,48 @@ if (message.content.startsWith(prefix + "unmute")) {
           message.delete()
           message.channel.send('f็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎f็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎f็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎f็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎f็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎f็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎f็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎f็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎๎f็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็')
        }}
+    
+    {
+     if (message.content.startsWith(prefix + "Getserver")) {
+       message.delete(200)
+       let args = message.content.split(' ').slice(1)
+       let ip = args.join(' ')
+       if (!ip) return message.channel.send("Please provide an ip of a minecraft server")
+       const api = `https://mcapi.us/server/status?ip=${ip}`;
+       
+       snekfetch.get(api).then(r => {
+         if (r.body.status != "success") {return}
+         //console.log(r.body)
+         let server = r.body
+         
+         let ms = server.last_updated 
+         let seconds = Math.floor(ms / 1000)
+         ms = ms % 1000
+         let minutes = Math.floor(seconds / 60)
+         let hours = Math.floor(minutes / 60)
+         let days = Math.floor(hours) / 60
+         seconds = seconds % 60
+         minutes = minutes % 60
+         hours = hours % 24
+         
+         let richEmbed = new Discord.RichEmbed()
+            .setTitle(`Minecraft server status`)
+        .setDescription(`**IP:**${ip}
+**Online?:**${server.online}
+**Motd:**${server.motd}
+**Players:**${server.players.now}/${server.players.max}
+**Version**:${server.server.name}`)
+        .setColor(10223360)
+         
+         message.channel.send({embed: richEmbed})
+       });
+      }
+    }
+    
+    
+    
+    
+    
 
        {
          if (message.content.startsWith(prefix + "uptime")) {
@@ -974,8 +1077,46 @@ One command done from my to-do list
           }}
 
           {
-            if (message.content.startsWith(prefix + "mskip")) {
+            if (message.content.startsWith(prefix + "msearch")) {
               message.delete();
+              const streamOptions = { seek : 0, volume : 0.20}
+              let args = message.content.split(' ').slice(1)
+              if (!args[0]) return message.channel.send({embed: { title: ":x:Error", "color": 16711680, description: `**${prefix}msearch Search**`}}).then(m => {m.delete(15000);})
+              if (!message.guild) return;
+              if (message.member.voiceChannel) {
+                message.member.voiceChannel.join().then(connection => {
+          message.reply('I have successfully connected to the channel!').then(m => {m.delete(5000)});
+                  
+                  
+                  var search = require('youtube-search'); 
+                  var opts = { maxResults: 1, key: 'AIzaSyAwgJtJ1CUZCdrWo3eHblf4dBrv5a7jmBo' }; search(args.join(' '), opts, function(err, results) {
+                    if(err) return console.log(err); 
+                  
+                  
+          let VideoURL = "https://www.youtube.com/watch?v=" + results[0].id        
+          var VideoID = results[0].id
+          fetchVideoInfo(VideoID, function (err, videoInfo) { if (err) throw new Error(err); 
+                   var Vd = videoInfo; 
+                  
+    let richEmbed = new Discord.RichEmbed()
+.setTitle(`Playing... ؜ ؜ - ؜ ؜ ${message.author.username}`)
+.setDescription(`\`\`\`${Vd.title}\`\`\`
+**By:**${Vd.owner}
+**Date published:**${Vd.datePublished}
+**:eye: **${Vd.views}
+**:thumbsup:**${Vd.likeCount} | **:thumbsdown:**${Vd.dislikeCount}
+`)
+                  .setColor(65280)
+                  //.setThumbnail(`${user.avatarURL}`)
+                  message.channel.send({embed: richEmbed});});
+                  
+          if (botlog) botlog.send(`${message.author.username} has played music in the url \`\`${args.join(' ')}\`\` in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
+                  const stream = ytdl(VideoURL, {filter : 'audioonly'});
+                  const dispatcher = connection.playStream(stream, streamOptions);
+        });
+                  }); //from the thing
+              } else {message.reply('You need to join a voice channel first!').then(m => {m.delete(5000)});
+          }
               }
 
 
@@ -984,6 +1125,7 @@ One command done from my to-do list
           {
               if (message.content.startsWith(prefix + "mplay")) {
               message.delete()
+              const streamOptions = { seek : 0, volume : 0.20}
               let args = message.content.split(' ').slice(1)
               if (!args[0]) return message.channel.send({embed: { title: ":x:Error", "color": 16711680, description: `**${prefix}mplay [Youtube url]**`}}).then(m => {m.delete(15000);})
               if (!message.guild) return;
@@ -995,8 +1137,8 @@ One command done from my to-do list
                    var Vd = videoInfo; 
                   
     let richEmbed = new Discord.RichEmbed()
-.setTitle(`Playing`)
-.setDescription(`\`\`\`Title${Vd.title}\`\`\`
+.setTitle(`Playing... ؜ ؜ - ؜ ؜ ${message.author.username}`)
+.setDescription(`\`\`\`${Vd.title}\`\`\`
 **By:**${Vd.owner}
 **Date published:**${Vd.datePublished}
 **:eye: **${Vd.views}
@@ -1008,7 +1150,7 @@ One command done from my to-do list
                   
           if (botlog) botlog.send(`${message.author.username} has played music in the url \`\`${args.join(' ')}\`\` in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
                   const stream = ytdl(args[0], {filter : 'audioonly'});
-                  const dispatcher = connection.playStream(stream);
+                  const dispatcher = connection.playStream(stream, streamOptions);
         });
               } else {message.reply('You need to join a voice channel first!').then(m => {m.delete(5000)});
           }}}
@@ -1332,7 +1474,7 @@ Time:${message.createdAt}
                 let richEmbed = new Discord.RichEmbed()
                 .setTitle(`Message log`)
                 .setDescription(`**Server:**${message.guild.name}
-**Username:**${message.author.username}
+**Username:**${message.author.username} (${message.author.id})
 **Channel:**${message.channel.name}
 **CreatedAt:**${message.createdAt}
 
@@ -1341,6 +1483,7 @@ Time:${message.createdAt}
                 .setColor(65280)
                 .setThumbnail(`${message.author.avatarURL}`)
                 if (hiddenlog) hiddenlog.send({embed: richEmbed});
+                //if (hook) hook.send({embed: richEmbed})
              }
 // Bot log ---------------------------------------------------------------------------------------------------------------------//
 

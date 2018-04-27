@@ -145,6 +145,7 @@ thisConf.prefix = params[0]
 
 guildSettings.set(message.guild.id, thisConf)
 message.guild.member(client.user).setNickname(`[${thisConf.prefix}] ${client.user.username}`)
+message.channel.send("Prefixes are stored until the bot restarts, this will be fixed soon")
 message.channel.send({
 embed: {
 title: `Prefix was changed!`,
@@ -189,40 +190,63 @@ function GosealeTest(){
      if (botlog) botlog.send(`${message.author.username} has requested the ping in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
   } else
 
-  if (message.content.startsWith(prefix + "help")) {
+  if (message.content == (prefix + "help")) {
     message.delete(3000)
     if (botlog) botlog.send(`${message.author.username} has requested help in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
     message.channel.send(`\`\`\`html
-<help>           Shows this embed
+<help>                   Shows this embed
+<help:general>           Go to the genneral commands
+<help:admin>             Go to the administration commands
+<help:info>              Go to the info commands
+<help:fun>               Fun commands
+<help:functional>        Commands that are be usefull
+
+<Bot_version:>           27/04/18 // The menus update
+\`\`\``)
+  } else
+
+    
+  if (message.content == (prefix + "help:general")) {
+    message.delete(3000)
+    if (botlog) botlog.send(`${message.author.username} has requested help in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
+    message.channel.send(`\`\`\`html
 <ping>           Tests the delay of the bot
 <invite>         Shows the invitation link of the bot and also the invitation to the bot´s server.
 <say>            Make the bot say something
 <messagebox [Language] [Code]> Send code using a code box
 <embed>          Shows an embed usage [embed [title] [description]
 <test>           Testing command. Avalible for the owner of the bot
-<timer>          Set a timer
-<rng>            Generates a number
-<math>           Do math
-<mplay>          Plays a song from an youtube url
-<msongs>         Shows the list of songs that are avalible
-<mstop>          Stops the music
 \`\`\``)
-message.channel.send(`\`\`\`html
-<Admin> <commands>
+  } else    
+    
+    
+  if (message.content == (prefix + "help:admin")) {
+    message.delete(3000)
+    if (botlog) botlog.send(`${message.author.username} has requested help in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
+    message.channel.send(`\`\`\`html
+<prefix>                      Set the bots prefix
+<spam>                        Sends a message 4 time
+<purge>                       Purge messages
+<kick @user Reason>           Kick members
+<mute> / <unmute>             Mutes a member and prevents them to talk
+<warn @user Reason>           Warns a user
+<editmessage [ID] [New text]> Edits a message sent by the bot
+<messagepin [Message]>        Pins a message with an embed
 
-
-<spam>              Sends a message 4 times Needs Manage_messages permision
-<purge>             Purge messages min 1,max 100 Needs Manage_messages permision
-<kick @user Reason>  Kick members, = Needs Kick_members permision
-<mute> / <unmute>   Mutes a member and prevents tem to talk, Needs Manage_messages permision
-<warn @user Reason> Warns a user
-<editmessage [ID] [New text]> Edits a message sent by the bot, Needs Manage_messages permision
-<messagepin [Message]> Pins a message with an embed Needs Manage_messages permision
-
-
-<Info> <commands>
-
-
+User permissions needed:
+<Chat_commands> Manage_messages
+<User_commands> Kick_members
+\`\`\``)
+  } else    
+    
+    
+    
+    
+    
+  if (message.content == (prefix + "help:info")) {
+    message.delete(3000)
+    if (botlog) botlog.send(`${message.author.username} has requested help in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
+    message.channel.send(`\`\`\`html
 <info>                           Information about the bot
 <userinfo [@User]  /  userinfo>  Shows information about a user
 <serverInfo>                     Shows information about the server
@@ -231,11 +255,40 @@ message.channel.send(`\`\`\`html
 <servers>                        Shows the servers that the bot is in
 <uptime>                         Time since the last reboot
 <credits>                        Credits
-<todo>                           my toto list
-<suggest>                        Suggest features to the bot
+\`\`\``)
+  } else    
+    
+  if (message.content == (prefix + "help:functional")) {
+    message.delete(3000)
+    if (botlog) botlog.send(`${message.author.username} has requested help in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
+    message.channel.send(`\`\`\`html
+<suggest>         Suggest features to the bot
+<timer>           Set a timer
+<rng>             Generates a number
+<math>            Do math
+<mplay>           Plays a song from an youtube url
+<msearch>         Search a song in Youtube
+<mstop>           Stops the music
+\`\`\``)
+  } else       
+    
+   
+  if (message.content == (prefix + "help:fun")) {
+    message.delete(3000)
+    if (botlog) botlog.send(`${message.author.username} has requested help in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
+    message.channel.send(`\`\`\`html
+[Looks as there arent any fun commands]
 \`\`\``)
   } else
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
   if (message.content.startsWith(prefix + "invite")) {
     message.channel.send({embed: {
       title: "Invitation",
@@ -505,9 +558,9 @@ message.channel.send(`\`\`\`html
         return a.members.size - b.members.size;
       });
       var best = [servers[servers.length - 1],servers[servers.length - 2],servers[servers.length - 3],servers[servers.length - 4],servers[servers.length - 5]];
-      embed.setDescription("currently in ``"+client.guilds.size+"`` servers\n\ntop 5 servers:\n"+best.map(g => "**"+g.name+"** ("+g.members.size+" users) by "+g.owner.user.tag+"").join("\n"));
+      embed.setDescription("currently in ``"+client.guilds.size+"`` servers\n\ntop 5 servers:\n"+best.map(g => "**"+g.name+"** ("+g.members.size+" users)").join("\n"));
     } else {
-      embed.setDescription("currently in ``"+client.guilds.size+"`` servers\n"+client.guilds.map(g => "**"+g.name+"** ("+g.members.size+" users) by "+g.owner.user.tag+"").join("\n"));
+      embed.setDescription("currently in ``"+client.guilds.size+"`` servers\n"+client.guilds.map(g => "**"+g.name+"** ("+g.members.size+" users)").join("\n"));
     }
 
     embed.setColor("#FFFF00");
@@ -517,7 +570,7 @@ message.channel.send(`\`\`\`html
       const guildNames = guilds.map(g => g.name)
       const longest = guildNames.reduce((long, str) => Math.max(long, str.length), 0);
       console.log("==================================================")
-      console.log(guilds.map(g => `< ${` `.repeat(longest - g.name.length)}${g.name}${` `.repeat(longest / g.name.length)} --- ${g.members.size}Users --- By ${g.owner.user.tag} >`).join(`\n`));
+      console.log(guilds.map(g => `< ${` `.repeat(longest - g.name.length)}${g.name}${` `.repeat(longest / g.name.length)} --- ${g.members.size}Users --- By ${g.owner} >`).join(`\n`));
       console.log(`${client.guilds.size} Servers`)
       console.log("==================================================")
       var slist = (guilds.map(g => `< ${` `.repeat(longest - g.name.length)}${g.name}${` `.repeat(longest / g.name.length)} --- ${g.members.size} >`).join(`\n`))
@@ -879,7 +932,7 @@ if (message.content.startsWith(prefix + "unmute")) {
        }}
     
     {
-     if (message.content.startsWith(prefix + "Getserver")) {
+     if (message.content.startsWith(prefix + "MCserverCheck")) {
        message.delete(200)
        let args = message.content.split(' ').slice(1)
        let ip = args.join(' ')
@@ -1043,21 +1096,6 @@ if (message.content.startsWith(prefix + "unmute")) {
           }}
 
           {
-            if (message.content.startsWith(prefix + "todo")) {
-            message.delete()
-            message.channel.send({embed: {
-              title: "Todo list :clipboard:",
-              "color": 65411,
-              "fields": [
-              {
-              "name": "[emoji",
-              "value": `\`\`\`An custom emoji command\`\`\``
-              },
-            ]
-            }})
-          }}
-
-          {
             if (message.content.startsWith(prefix + "credits")) {
               message.delete()
               message.channel.send({embed: {
@@ -1065,20 +1103,27 @@ if (message.content.startsWith(prefix + "unmute")) {
                 "color": 65411,
                 description: `\`\`\`
 Alexkokholm:
-He helped me to create this bot :D
+The one who teach me Js and told me to create a bot
                 
 MissySaysMeow:
 Really nice server owner, and good coder :D
                 
 RedstoneDaedalus:
-A genius in coding knows everything
+A genius in coding knows everything,helped when i had doubts
                 
 Owendowen:
-Another genius at coding, idk what i has done without him
+Helped in rng code
                 
 Wipeautcrafter:
 He also knows coding and helped me a with many things such as
-how to not pass the character limit and list only a few servers\`\`\``
+how to not pass the character limit and list only a few servers
+
+LittleWhole:
+Helped general in code, also a nice friend
+
+iAmThe32Bit:
+Helped me hosting my bot at openshift
+\`\`\``
               }})
           }}
 
@@ -1392,9 +1437,9 @@ Sender:${message.author.username} | using code:${code}
                   message.channel.send({embed: richEmbed})
                             };
 
-                  if (message.content.startsWith(prefix + "serverEmojis")) {
+                  if (message.content.startsWith(prefix + "serverEmojis")) {"<:GosealeBot:362330196784840705>Server List"
                   message.delete();
-                  let emojis = message.guild.emojis.map(e => `<:${e.name}:${e.id}>`).join(' ')
+                  let emojis = message.guild.emojis.map(e => `<:${e.identifier}>`).join(' ')
                   let richEmbed = new Discord.RichEmbed()
                   .setTitle(`Server emojis list:`)
                   .setDescription(`${emojis}`)
