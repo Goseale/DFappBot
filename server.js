@@ -1439,7 +1439,7 @@ Sender:${message.author.username} | using code:${code}
 
                   if (message.content.startsWith(prefix + "serverEmojis")) {"<:GosealeBot:362330196784840705>Server List"
                   message.delete();
-                  let emojis = message.guild.emojis.map(e => `<:${e.identifier}>`).join(' ')
+                  let emojis = message.guild.emojis.map(e=>e.toString()).join(" ");
                   let richEmbed = new Discord.RichEmbed()
                   .setTitle(`Server emojis list:`)
                   .setDescription(`${emojis}`)
