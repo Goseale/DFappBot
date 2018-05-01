@@ -1333,6 +1333,7 @@ One command done from my to-do list
           {
             if (message.content.startsWith(prefix + "mstop")) {
               message.delete();
+              const = queue[message.guild.id] == []
               if (message.member.voiceChannel) {
               message.member.voiceChannel.leave()
               if (botlog) botlog.send(`${message.author.username} has stopped the music in the channel \`\`${message.channel.name}\`\` in the server \`\`${message.guild.name}\`\``)
