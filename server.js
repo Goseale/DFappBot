@@ -342,6 +342,10 @@ User permissions needed:
     //`**Evaluated:**:white_check_mark:\n\`\`\`${out}\`\`\``//
     //description: `\`\`\`js
     //${out}\`\`\``
+      
+    if (out == client.token) {
+      let out = "Bot token"
+    }
     message.channel.send({embed: {
       title: "**Evaluated:**:white_check_mark:",
       "color": 65280,
