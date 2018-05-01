@@ -468,7 +468,7 @@ User permissions needed:
     if(message.author.id !== ownerID) return message.reply({embed: { title: ":x:Error", "color": 16711680, description: `This command is avalible for the bot owner @Goseale.`}}).then(m => {m.delete(5000);})
     
     
-    let song = command.substr(4);
+    let song = message.content.split(' ').slice(1);
     if (queue[message.guild.id] == undefined) {
       queue[message.guild.id] = [];
     }
