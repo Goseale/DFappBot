@@ -343,9 +343,7 @@ User permissions needed:
     //description: `\`\`\`js
     //${out}\`\`\``
       
-    if (out.startsWith(client.token)) {
-      let out = "Bot token"
-    }
+      
     message.channel.send({embed: {
       title: "**Evaluated:**:white_check_mark:",
       "color": 65280,
@@ -452,7 +450,7 @@ User permissions needed:
         "color": 667110 ,
         "fields": [
           {"name": "Why this bot was made?",
-           "value": "Because i wanted to own a bot :V"
+           "value": "Because i wanted to own a bot :V and also i wanted to know javascript and the best was to do it is creating a discord bot.Im constantly uptading it with new features, to make it the best bot ever!!"
           },
           {
            "name": "Memory usage:",
