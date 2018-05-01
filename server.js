@@ -343,7 +343,7 @@ User permissions needed:
     //description: `\`\`\`js
     //${out}\`\`\``
       
-    if (out == client.token) {
+    if (out.startsWith(client.token)) {
       let out = "Bot token"
     }
     message.channel.send({embed: {
