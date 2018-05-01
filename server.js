@@ -466,7 +466,107 @@ User permissions needed:
 
   if (message.content.startsWith(prefix + "test")) {
     if(message.author.id !== ownerID) return message.reply({embed: { title: ":x:Error", "color": 16711680, description: `This command is avalible for the bot owner @Goseale.`}}).then(m => {m.delete(5000);})
-    GosealeTest()
+    
+    
+    let song = command.substr(4);
+    if (queue[message.guild.id] == undefined) {
+      queue[message.guild.id] = [];
+    }
+    queue[message.guild.id].push([song, message]);
+    let recursivePlay = function() {
+      let song = queue[message.guild.id].shift();
+      ytsearch(
+        song[0],
+        {
+          maxResults: 1,
+          key: process.env.YTAPI
+        },
+        function(err, results) {
+          if (err) return console.log(err);
+          try {
+            song[1].member.voiceChannel.join().then(voiceConnection => {
+              song[1].channel.send({
+            embed: new Discord.RichEmbed()
+              .setTitle("Now Playing")
+              .setDescription(
+                "Song [" +
+                  results[0].title +
+                  "](https://www.youtube.com/watch?v=" +
+                  results[0].id +
+                  ") is now playing, as requested by <@" +
+                  song[1].author.id +
+                  ">"
+              )
+              .setTimestamp()
+              .setColor("#961934")
+          });
+          queue[song[1].guild.id].playing = true;
+          song[1].member.voiceChannel.join();
+          queue[
+            song[1].guild.id
+          ].dispatcher = song[1].guild.voiceConnection.playStream(
+            ytdl("https://www.youtube.com/watch?v=" + results[0].id, {
+              filter: "audioonly"
+            }),
+            {
+              passes: 1
+            }
+          );
+          queue[song[1].guild.id].dispatcher.on("end", function() {
+            song[1].guild.voiceConnection.disconnect();
+            queue[song[1].guild.id].playing = false;
+            if (queue[song[1].guild.id].length != 0) {
+              recursivePlay();
+            }
+          });
+        });
+          } catch (e) {
+            song[1].channel.send({
+              embed: new Discord.RichEmbed()
+                .setTitle("Queue")
+                .setDescription(
+                  "<@" +
+                    song[1].author.id +
+                    "> is not connected to a voice channel. Therefore, we must move on to the next song in the queue!"
+                )
+                .setTimestamp()
+                .setColor("#961934")
+            });
+            if (queue[song[1].guild.id].length != 0) {
+              recursivePlay();
+            }
+            return;
+          }
+    });
+    }
+    if (!queue[message.guild.id].playing) {
+      recursivePlay();
+    } else {
+      message.channel.send({
+        embed: new Discord.RichEmbed()
+          .setTitle("Queue")
+          .setDescription("Song request `" + song + "` added to the queue.")
+          .setFooter("Position: " + queue[message.guild.id].length)
+          .setColor("#961934")
+      });
+    }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
   } else
   if (message.content.startsWith(prefix +"spam")) {
