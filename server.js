@@ -550,7 +550,6 @@ User permissions needed:
           .setColor("#961934")
       });
     }
-    }
     
     
     
