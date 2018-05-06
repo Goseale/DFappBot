@@ -190,6 +190,9 @@ function getQueue(guild) {
   return queues[guild]
 }
     
+function sendMessage(msg) {
+ message.channel.send(msg) 
+}
     
 function play(msg, queue, song) {
   if (!msg || !queue) return
