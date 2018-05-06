@@ -43,6 +43,8 @@ const RoleName = config.role_name
 const yt_api_key = config.yt_api_key;
 const hook = new Discord.WebhookClient('429048457710403604', "6bGx0MVRjineYJXDc_Nx15VvdaoH3BWAghUbvHZYbWFafNqD91h2ukH22jE4uUnOghDt");
 
+const queues = {}
+
 client.login(process.env.TOKEN);
 
 //http.createServer(function (req, res) { res.writeHead(200, {'Content-Type': 'text/plain'}); res.send('it is running\n'); }).listen(process.env.PORT || 5000)
