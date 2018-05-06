@@ -556,6 +556,7 @@ User permissions needed:
     
     
     let suffix = "Discord"
+    var search = require('youtube-search'); 
     play(message, getQueue(message.guild.id), suffix)
     
     
