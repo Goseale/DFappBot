@@ -195,7 +195,7 @@ function play(msg, queue, song) {
   if (!msg || !queue) return
   if (song) {
     search(song, opts, function(err, results) {
-      if (err) return bot.sendMessage(msg, "Video not found please try to use a youtube video.");
+      if (err) return client.sendMessage(msg, "Video not found please try to use a youtube video.");
       song = (song.includes("https://" || "http://")) ? song : results[0].link
       let stream = ytdl(song, {
         audioonly: true
@@ -207,7 +207,7 @@ function play(msg, queue, song) {
         "requested": msg.author.username,
         "toplay": stream
       })
-      bot.sendMessage(msg, "Queued **" + queue[queue.length - 1].title + "**")
+      client.sendMessage(msg, "Queued **" + queue[queue.length - 1].title + "**")
       if (test) {
         setTimeout(function() {
           play(msg, queue)
@@ -215,8 +215,8 @@ function play(msg, queue, song) {
       }
     })
   } else if (queue.length != 0) {
-    bot.sendMessage(msg, `Now Playing **${queue[0].title}** | by ***${queue[0].requested}***`)
-    let connection = bot.voiceConnections.get('server', msg.server)
+    client.sendMessage(msg, `Now Playing **${queue[0].title}** | by ***${queue[0].requested}***`)
+    let connection = client.voiceConnections.get('server', msg.server)
     if (!connection) return
     connection.playRawStream(queue[0].toplay).then(intent => {
       intent.on('error', () => {
@@ -230,7 +230,7 @@ function play(msg, queue, song) {
       })
     })
   } else {
-    bot.sendMessage(msg, 'No more music in queue')
+    client.sendMessage(msg, 'No more music in queue')
   }
 }
     
