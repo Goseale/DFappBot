@@ -554,7 +554,7 @@ User permissions needed:
     
     
     let suffix = "Discord"
-    play(message, getQueue(message.server.id), suffix)
+    play(message, getQueue(message.guild.id), suffix)
     
     
     
