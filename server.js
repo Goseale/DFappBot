@@ -44,6 +44,11 @@ const yt_api_key = config.yt_api_key;
 const hook = new Discord.WebhookClient('429048457710403604', "6bGx0MVRjineYJXDc_Nx15VvdaoH3BWAghUbvHZYbWFafNqD91h2ukH22jE4uUnOghDt");
 
 const queues = {}
+const opts = {
+  part: 'snippet',
+  maxResults: 10,
+  key: yt_api_key
+}
 
 client.login(process.env.TOKEN);
 
