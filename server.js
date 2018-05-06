@@ -173,6 +173,91 @@ function GosealeTest(){
 //hook.send("<:Loading:435586369302298624> <:Typing:435586380899549184>");
 
 }
+    
+    
+function getQueue(guild) {
+  if (!guild) return
+  if (typeof guild == 'object') guild = guild.id
+  if (queues[guild]) return queues[guild]
+  else queues[guild] = []
+  return queues[guild]
+}
+    
+    
+function play(msg, queue, song) {
+  if (!msg || !queue) return
+  if (song) {
+    search(song, opts, function(err, results) {
+      if (err) return bot.sendMessage(msg, "Video not found please try to use a youtube video.");
+      song = (song.includes("https://" || "http://")) ? song : results[0].link
+      let stream = ytdl(song, {
+        audioonly: true
+      })
+      let test
+      if (queue.length === 0) test = true
+      queue.push({
+        "title": results[0].title,
+        "requested": msg.author.username,
+        "toplay": stream
+      })
+      bot.sendMessage(msg, "Queued **" + queue[queue.length - 1].title + "**")
+      if (test) {
+        setTimeout(function() {
+          play(msg, queue)
+        }, 1000)
+      }
+    })
+  } else if (queue.length != 0) {
+    bot.sendMessage(msg, `Now Playing **${queue[0].title}** | by ***${queue[0].requested}***`)
+    let connection = bot.voiceConnections.get('server', msg.server)
+    if (!connection) return
+    connection.playRawStream(queue[0].toplay).then(intent => {
+      intent.on('error', () => {
+        queue.shift()
+        play(msg, queue)
+      })
+
+      intent.on('end', () => {
+        queue.shift()
+        play(msg, queue)
+      })
+    })
+  } else {
+    bot.sendMessage(msg, 'No more music in queue')
+  }
+}
+    
+    
+function secondsToString(seconds) {
+    try {
+        var numyears = Math.floor(seconds / 31536000);
+        var numdays = Math.floor((seconds % 31536000) / 86400);
+        var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+        var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+        var numseconds = Math.round((((seconds % 31536000) % 86400) % 3600) % 60);
+
+        var str = "";
+        if(numyears>0) {
+            str += numyears + " year" + (numyears==1 ? "" : "s") + " ";
+        }
+        if(numdays>0) {
+            str += numdays + " day" + (numdays==1 ? "" : "s") + " ";
+        }
+        if(numhours>0) {
+            str += numhours + " hour" + (numhours==1 ? "" : "s") + " ";
+        }
+        if(numminutes>0) {
+            str += numminutes + " minute" + (numminutes==1 ? "" : "s") + " ";
+        }
+        if(numseconds>0) {
+            str += numseconds + " second" + (numseconds==1 ? "" : "s") + " ";
+        }
+        return str;
+    } catch(err) {
+        console.log("Could not get time")
+        return 'Could not get time';
+    }
+}
 //Functions// //End//
     
     
@@ -468,8 +553,8 @@ User permissions needed:
     if(message.author.id !== ownerID) return message.reply({embed: { title: ":x:Error", "color": 16711680, description: `This command is avalible for the bot owner @Goseale.`}}).then(m => {m.delete(5000);})
     
     
-    
-    
+    let suffix = "Discord"
+    play(message, getQueue(message.server.id), suffix)
     
     
     
