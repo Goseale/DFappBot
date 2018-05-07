@@ -38,6 +38,7 @@ var Fraction = algebra.Fraction;
 var Expression = algebra.Expression;
 var Equation = algebra.Equation;
 const ownerID = process.env.OWNER
+const littleID = process.env.LITTLE
 const online_status = config.online_status
 const RoleName = config.role_name
 const yt_api_key = config.yt_api_key;
@@ -424,7 +425,7 @@ User permissions needed:
     message.delete()
     let args = message.content.split(/\s+/g);
     if (!args[0]) return message.reply(`Please provide something to eval.Usage:${prefix}eval [Args]`).then(m => {m.delete(10000);})
-    if(message.author.id !== ownerID) return message.reply({embed: { title: ":x:Error", "color": 16711680, description: `Tryed to use ${prefix}eval.He/She failed,now He/She is thinking about this bot is so secured :V`}}).then(m => {m.delete(15000);})
+    if(message.author.id !== ownerID && message.author.id !== littleID) return message.reply({embed: { title: ":x:Error", "color": 16711680, description: `Tryed to use ${prefix}eval.He/She failed,now He/She is thinking about this bot is so secured :V`}}).then(m => {m.delete(15000);})
    args.shift();
 
     const result = new Promise((resolve, reject) => resolve(eval(args.join(" "))));
@@ -483,7 +484,7 @@ User permissions needed:
 
 
     if (message.content.startsWith(prefix + "betaeval")) {
-  if(message.author.id !== ownerID) return message.reply({embed: { title: ":x:Error", "color": 16711680, description: `Tryed to use ${prefix}eval.He/She failed,now He/She is thinking about this bot is so secured :V`}}).then(m => {m.delete(15000);});
+  if(message.author.id !== ownerID && message.author.id !== littleID) return message.reply({embed: { title: ":x:Error", "color": 16711680, description: `Tryed to use ${prefix}eval.He/She failed,now He/She is thinking about this bot is so secured :V`}}).then(m => {m.delete(15000);});
     try {
       let args = message.content.split(' ').slice(1)
       var code = args.join(" ");
