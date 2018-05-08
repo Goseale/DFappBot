@@ -42,6 +42,7 @@ const littleID = process.env.LITTLE
 const online_status = config.online_status
 const RoleName = config.role_name
 const yt_api_key = config.yt_api_key;
+const started = Date();
 const hook = new Discord.WebhookClient('429048457710403604', "6bGx0MVRjineYJXDc_Nx15VvdaoH3BWAghUbvHZYbWFafNqD91h2ukH22jE4uUnOghDt");
 
 const queues = {}
@@ -59,6 +60,7 @@ client.login(process.env.TOKEN);
 var botlog;
 var channel_suggest;
 var hiddenlog;
+var bootLOG
 client.on("ready", () => {
   console.log(config.welcome_message_console);
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
@@ -71,6 +73,8 @@ client.on("ready", () => {
   console.log("==================================================")
   channel_suggest = client.channels.get(`341355620496048132`);
   hiddenlog = client.channels.get(`357596301522632715`);
+  bootLOG = client.channels.get(`443209914442317825`);
+  
 });
 
 client.on("ready", () => {
@@ -86,6 +90,7 @@ if (botlog) botlog.send(client.guilds.map(g => g.name).join('\n')).then(m => {
   m.delete(14000)});
 client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
 client.user.setStatus("online"); //online,invisible,idle,dnd (do not disturb)
+if (bootLOG) bootLOG.send(`<@229016449593769984> Started at: ${started}`)
 });
 
 client.on('guildCreate', guild => {
