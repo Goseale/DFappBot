@@ -6,8 +6,7 @@
   "version": "0.0.1",
   "description": "Discord Bot",
   "scripts": {
-    "start": "node server.js",
-    "end": "npm start"
+    "start": "node server.js"
   },
   "dependencies": {
     "ffmpeg-static": "^2.2.0",
