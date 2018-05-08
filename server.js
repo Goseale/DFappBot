@@ -80,7 +80,10 @@ client.on("ready", () => {
 
 process.on('uncaughtException', function (err) {
   console.error(err);
-if (bootLOG) bootLOG.send(`<@229016449593769984> Bot tryed to crash, error: ${err}`)
+if (bootLOG) bootLOG.send(`<@229016449593769984> Bot tryed to crash, error: ${err}
+\`\`\`js
+${err.stack}
+\`\`\``)
 });
 
 
