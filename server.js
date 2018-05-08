@@ -77,6 +77,15 @@ client.on("ready", () => {
   
 });
 
+
+process.on('uncaughtException', function (err) {
+  console.error(err);
+if (bootLOG) bootLOG.send(`<@229016449593769984> Bot tryed to crash, error: ${err}`)
+});
+
+
+
+
 client.on("ready", () => {
 client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
 if (botlog) botlog.send("Starting bot...")
