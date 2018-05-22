@@ -1,1 +1,2 @@
 # GosealeBot
+## Beta version

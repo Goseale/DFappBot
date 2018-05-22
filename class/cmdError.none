@@ -1,0 +1,11 @@
+  if (!args[0]) {
+    const Discord = require('discord.js');
+    const Error = new Discord.RichEmbed()
+            .setTitle(`\`${cmd}\``)
+            .addField(`Description` ,`Chooses from a list`, true)
+            .addField("Usage", `\`\`\`${prefix}${cmd} Option1_Option2_continue...\`\`\``, true)
+            .setColor(message.member.displayHexColor);
+
+        message.channel.send({embed: Error});
+    return
+  }

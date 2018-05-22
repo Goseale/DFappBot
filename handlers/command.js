@@ -1,0 +1,45 @@
+let Command;
+module.exports = async function handleCommand(client, message, cmd, args, prefix) {
+let hiddenlog = client.channels.get(`357596301522632715`);
+const Discord = require('discord.js');
+    try {
+        Command = require(`../commands/${cmd}.js`);
+        
+      
+        if (hiddenlog) {
+          
+         
+          console.log(`
+- - - - - - - - - - - - - - - - - -
+Message log:
+Server:${message.guild.name}
+User:${message.author.username}
+Channel:${message.channel.name}
+Message:${args.join(' ')}
+Time:${message.createdAt}
+- - - - - - - - - - - - - - - - - -`)
+                let richEmbed = new Discord.RichEmbed()
+                .setTitle(`Message log`)
+                .setDescription(`**Server:**${message.guild.name}
+**Username:**${message.author.username} (${message.author.id})
+**Channel:**${message.channel.name}
+**CreatedAt:**${message.createdAt}
+**Message:**${args.join(' ')}
+\`\`\`${args.join(' ')}\`\`\``)
+                .setColor(65280)
+                .setThumbnail(`${message.author.avatarURL}`)
+                if (hiddenlog) hiddenlog.send({embed: richEmbed});
+          
+          
+        }
+      
+      
+        Command(client, message, cmd, args, prefix)
+    } catch(error) {
+        if (hiddenlog) {hiddenlog.send(`Error:
+\`\`\`js
+${error}
+\`\`\``)
+        return;
+    }}
+}

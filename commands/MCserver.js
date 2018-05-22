@@ -1,7 +1,19 @@
+const Discord = require('discord.js');
+const snekfetch = require('snekfetch');
 
+module.exports = async function(client, message, cmd, args, prefix) {
+  
+         let ip = args.join(' ')
+       if (!args[0]) {
+    const Error = new Discord.RichEmbed()
+            .setTitle(`\`${cmd}\``)
+            .addField(`Description` ,`Checks a minecraft server`, true)
+            .addField("Usage", `\`\`\`${prefix}${cmd} [IP]\`\`\``, true)
+            .setColor(message.member.displayHexColor);
 
-       let ip = args.join(' ')
-       if (!ip) return message.channel.send("Please provide an ip of a minecraft server")
+        message.channel.send({embed: Error});
+    return
+  }
        const api = `https://mcapi.us/server/status?ip=${ip}`;
        
        snekfetch.get(api).then(r => {
@@ -30,4 +42,5 @@
          
          message.channel.send({embed: richEmbed})
        });
-      }
+  
+}

@@ -66,7 +66,7 @@ client.on("ready", () => {
 });
 
 client.on("ready", () => {
-client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
+client.user.setPresence({ game: { name: `B[help | ${client.guilds.size} server(s)`, type: 0 } });
 if (botlog) botlog.send("Starting bot...")
 if (botlog) botlog.send("Loading the code...")
 if (botlog) botlog.bulkDelete(100)
@@ -76,12 +76,12 @@ if (botlog) botlog.send("**__The Servers im on:__**").then(m => {
   m.delete(14500)});
 if (botlog) botlog.send(client.guilds.map(g => g.name).join('\n')).then(m => {
   m.delete(14000)});
-client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
+client.user.setPresence({ game: { name: `B[help | ${client.guilds.size} server(s)`, type: 0 } });
 client.user.setStatus("online"); //online,invisible,idle,dnd (do not disturb)
 });
 
 client.on('guildCreate', guild => {
-  client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
+  client.user.setPresence({ game: { name: `B[help | ${client.guilds.size} server(s)`, type: 0 } });
   let richEmbed = new Discord.RichEmbed()
                 .setTitle(`Joined guild`)
                 .setDescription(`**Server:**${guild.name}
@@ -93,13 +93,13 @@ client.on('guildCreate', guild => {
   if (guild.defaultChannel) guild.defaultChannel.send({
      embed: {
        "color": 13253,
-         description: `**Thanks for inviting me to your server! do [help to get started :D**`
+         description: `**Thanks for inviting me to your server! do B[help to get started :D**`
      }});
 });
 
 
 client.on('guildDelete', guild => {
-  client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
+  client.user.setPresence({ game: { name: `B[help | ${client.guilds.size} server(s)`, type: 0 } });
   let richEmbed = new Discord.RichEmbed()
                 .setTitle(`Left guild`)
                 .setDescription(`**Server:**${guild.name}
