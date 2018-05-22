@@ -27,7 +27,7 @@ if (botlog) botlog.send("**__The Servers im on:__**").then(m => {
   m.delete(14500)});
 if (botlog) botlog.send(client.guilds.map(g => g.name).join('\n')).then(m => {
   m.delete(14000)});
-client.user.setPresence({ game: { name: `beta.help | ${client.guilds.size} server(s)`, type: 0 } });
+client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
 client.user.setStatus("online"); //online,invisible,idle,dnd (do not disturb)
 });
     
