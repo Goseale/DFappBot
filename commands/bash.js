@@ -18,7 +18,7 @@ module.exports = async function(client, message, cmd, args, prefix) {
               else
                   return text;
     }
-    let msg = await message.channel.send("<a:loading:447995522330918912> Executing...");
+    let msg = await message.channel.send("<a:Loading:435585507016310785> Executing...");
       try {
 
         const code = args.join(" ");
