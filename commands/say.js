@@ -11,6 +11,7 @@ module.exports = async function(client, message, cmd, args, prefix) {
         message.channel.send({embed: Error});
     return
   }
+    message.delete()
     message.channel.send(args.join(' '))
 
 }
