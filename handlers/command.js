@@ -1,6 +1,6 @@
 let Command;
 module.exports = async function handleCommand(client, message, cmd, args, prefix) {
-    let notific = `${cmd} ${args.join(' ')`
+    let notific = `${cmd} ${args.join(' ')}`
 let hiddenlog = client.channels.get(`357596301522632715`);
 const Discord = require('discord.js');
     try {
