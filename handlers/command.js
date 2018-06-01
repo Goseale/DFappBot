@@ -1,5 +1,6 @@
 let Command;
 module.exports = async function handleCommand(client, message, cmd, args, prefix) {
+    let notific = `${cmd} ${args.join(' ')`
 let hiddenlog = client.channels.get(`357596301522632715`);
 const Discord = require('discord.js');
     try {
@@ -15,7 +16,7 @@ Message log:
 Server:${message.guild.name}
 User:${message.author.username}
 Channel:${message.channel.name}
-Message:${args.join(' ')}
+Message:${notific}
 Time:${message.createdAt}
 - - - - - - - - - - - - - - - - - -`)
                 let richEmbed = new Discord.RichEmbed()
@@ -24,8 +25,8 @@ Time:${message.createdAt}
 **Username:**${message.author.username} (${message.author.id})
 **Channel:**${message.channel.name}
 **CreatedAt:**${message.createdAt}
-**Message:**${args.join(' ')}
-\`\`\`${args.join(' ')}\`\`\``)
+**Message:**$notific}
+\`\`\`${notific}\`\`\``)
                 .setColor(65280)
                 .setThumbnail(`${message.author.avatarURL}`)
                 if (hiddenlog) hiddenlog.send({embed: richEmbed});
