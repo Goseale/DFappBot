@@ -14,6 +14,7 @@ if (roles.length >= 1024) {
                   message.channel.send({embed: richEmbed})
   } catch(err) {
     console.log(err)
+    return
 }
   
 }
