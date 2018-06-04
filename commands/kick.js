@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 module.exports = async function(client, message, cmd, args, prefix) {
 
-
+try{
 const user = message.mentions.members.first();
     let argse = message.content.split(' ').slice(2)
     if (!message.guild.me.permissions.has("KICK_MEMBERS")) return message.reply("I don`t have *KICK_MEMBERS* permissions!");
@@ -32,5 +32,9 @@ const user = message.mentions.members.first();
 **Reson:**${argse.join(' ')}`)
 .setColor(16776960)
      if (logchannel) logchannel.send({embed: richEmbed})
+} catch(err){
+    console.log(err)
+    return
+}
   
 }
