@@ -4,6 +4,8 @@ const fetchVideoInfo = require('youtube-info');
 const getYouTubeID = require('get-youtube-id');
 const ytdl          = require('ytdl-core');
 module.exports = async function(client, message, cmd, args, prefix) {
+  
+  try{
 const streamOptions = { seek : 0, volume : 0.20}
               if (!args[0]) return message.channel.send({embed: { title: ":x:Error", "color": 16711680, description: `**${prefix}mplay [Youtube url]**`}}).then(m => {m.delete(15000);})
               if (!message.guild) return;
@@ -30,4 +32,8 @@ const streamOptions = { seek : 0, volume : 0.20}
         });
               } else {message.reply('You need to join a voice channel first!').then(m => {m.delete(5000)});
           }
+  } catch(err) {
+    console.log(err)
+    return
+  }
 }
