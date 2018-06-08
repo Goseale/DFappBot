@@ -39,7 +39,7 @@
     "sqlite3": "^4.0.0"
   },
   "engines": {
-    "node": "2.x"
+    "node": "8.x"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/my-glitch-app"
