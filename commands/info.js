@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 module.exports = async function(client, message, cmd, args, prefix) {
 
 let ms = client.uptime 
