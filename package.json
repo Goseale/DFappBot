@@ -40,7 +40,7 @@
     "graceful-fs": "^4.1.11"
   },
   "engines": {
-    "node": ">=9.X"
+    "node": "10.X"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/my-glitch-app"
