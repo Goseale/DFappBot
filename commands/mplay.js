@@ -8,6 +8,11 @@ module.exports = async function(client, message, cmd, args, prefix) {
   try{
 const streamOptions = { seek : 0, volume : 0.20}
               if (!args[0]) return message.channel.send({embed: { title: ":x:Error", "color": 16711680, description: `**${prefix}mplay [Youtube url]**`}}).then(m => {m.delete(15000);})
+              if (!message.content.includes('http')) {
+                message.channel.send("I need a link for the video")
+                message.channel.send("Or you could use msearch")
+                return
+              }
               if (!message.guild) return;
               if (message.member.voiceChannel) {
                 message.member.voiceChannel.join().then(connection => {
