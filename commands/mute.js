@@ -24,7 +24,7 @@ module.exports = async function(client, message, cmd, args, prefix) {
   }
   
         if (!user) return message.channel.send("**Please mention a user to mute.**");
-
+try{
         message.channel.send(`**Successfully muted ${user.user.tag} with reason:${args.join(' ')}.**`);
         let logchannel = message.guild.channels.find("name", "log")
         let richEmbed = new Discord.RichEmbed()
@@ -48,5 +48,7 @@ mentionable: true,
 user.addRole(role.id)
 }
 )
-
+  
+} catch(err) {console.log(err)
+              return}
 }
