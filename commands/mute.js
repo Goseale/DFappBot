@@ -4,6 +4,7 @@ const config = require("../config.json");
 
 
 module.exports = async function(client, message, cmd, args, prefix) {
+  let RoleName = config.role_name
   let argse = message.content.split(' ').slice(2)
 
         const user = message.mentions.members.first();
