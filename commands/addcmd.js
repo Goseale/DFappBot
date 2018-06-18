@@ -16,7 +16,6 @@ module.exports = async function(client, message, cmd, args, prefix) {
   }
   
   
-var fs = require('file-system');
 var file = require('graceful-fs')
 let a = message.content.split(`[addcmd `)
   let b = a.join(" ")
