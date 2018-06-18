@@ -68,4 +68,11 @@ ${choose[1]}
 //code generated on cmd
 `, function(err) {console.log(err)})
   
+  const Valid = new Discord.RichEmbed()
+            .setTitle(`\`Add ${args[0]}\``)
+            .addField(`Result` ,`Command **${args[0]}** succsesfully added`, true)
+            .setColor(message.member.displayHexColor);
+
+        message.channel.send({embed: Valid});
+  
 }
