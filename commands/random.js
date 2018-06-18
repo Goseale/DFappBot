@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = async function(client, message, cmd, args, prefix) {
-  let a = message.content.split(`beta.random `)
+  let a = message.content.split(`[random `)
   let b = a.join(" ")
   let choose = b.split("_")
   
