@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "ffmpeg-static": "^2.2.0",
-    "os": ">=0.1.1",
-    "core-worker": ">=0.3.5",
     "algebra": "^0.0.2",
     "bufferutil": "^3.0.3",
     "discord.js": "^11.3.2",
@@ -37,10 +35,11 @@
     "youtube-search": "^1.1.0",
     "child_process": "^1.0.2",
     "sqlite3": "^4.0.0",
-    "graceful-fs": "^4.1.11"
+    "graceful-fs": "^4.1.11",
+    "file-system": "^2.2.2"
   },
   "engines": {
-    "node": "9.X"
+    "node": "9.x"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/my-glitch-app"
