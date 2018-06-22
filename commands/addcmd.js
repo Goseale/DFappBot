@@ -59,7 +59,7 @@ const Invalid = new Discord.RichEmbed()
 }
  
  */
- 
+message.delete()
 file.writeFile(`commands/${args[0]}.js`, `
 module.exports = async function(client, message, cmd, args, prefix) {
 ${choose[1]}
