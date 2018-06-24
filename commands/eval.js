@@ -6,7 +6,6 @@ module.exports = async function(client, message, cmd, args, prefix) {
   
   if (!toeval[0]) return message.reply(`Please provide something to eval.Usage:${prefix}eval [Args]`).then(m => {m.delete(10000);})
     if(message.author.id !== ownerID && message.author.id !== littleID) return message.reply({embed: { title: ":x:Error", "color": 16711680, description: `Tryed to use ${prefix}eval.He/She failed,now He/She is thinking about this bot is so secured :V`}}).then(m => {m.delete(15000);})
-   toeval.shift();
 
     const result = new Promise((resolve, reject) => resolve(eval(toeval.join(" "))));
 
