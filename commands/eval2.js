@@ -29,7 +29,7 @@ module.exports = async function (client, message, cmd, args) {
             .setTitle("\`Evaluation errored\`")
             .addField("Input", `\`\`\`JavaScript\n${code}\`\`\``, true)
             .addField("Error", `\`\`\`JavaScript\n${err}\`\`\``, true)
-            .setFooter("Nitrus by LittleWhole#2107")
+            .setFooter("2nd eval Goseale")
             .setTimestamp()
             .setColor(message.member.displayHexColor);
 
