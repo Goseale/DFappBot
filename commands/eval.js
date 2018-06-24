@@ -80,7 +80,8 @@ module.exports = async function(client, message, cmd, args, prefix) {
       ${e}\`\`\``
       },
           ]
-    }})
+    }}).then(m => {let response = m.createdTimestamp - message.createdTimestamp
+    message.channel.send(`Evaled in: ${response} ms`)
   })
   
   
