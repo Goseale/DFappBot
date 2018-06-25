@@ -1,7 +1,17 @@
 const Discord = require('discord.js');
 const snekfetch = require('snekfetch');
+const talkedRecently = new Set(); //Ignore the error
 
 module.exports = async function(client, message, cmd, args, prefix) {
+  
+  //anti spam
+  if (talkedRecently.has(message.author.id)) {
+            message.channel.send("This command uses an API so it has a cooldown of 1 minute -" + message.author);
+            return
+    }
+  //anti spam end
+  
+  
   
          let ip = args.join(' ')
        if (!args[0]) {
@@ -42,5 +52,12 @@ module.exports = async function(client, message, cmd, args, prefix) {
          
          message.channel.send({embed: richEmbed})
        });
+  
+  //anti spam
+  talkedRecently.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          talkedRecently.delete(message.author.id);
+        }, 60000);
   
 }
