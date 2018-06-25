@@ -6,5 +6,6 @@ module.exports = async function(client, message, cmd, args) {
 <messagebox [Language] [Code]> Send code using a code box
 <embed>          Shows an embed usage [embed [title] [description]
 <test>           Testing command. Avalible for the owner of the bot
+<MCserver [IP]>  Information of a Minecraft server
 \`\`\``)
 }
