@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 module.exports = async function(client, message, cmd, args, prefix) {
   
   let ownerID = process.env.OWNER
@@ -43,44 +44,36 @@ module.exports = async function(client, message, cmd, args, prefix) {
         return
 }
       
+    const Evaled = new Discord.RichEmbed()
+            .setTitle("**Evaluated:**:white_check_mark:")
+            .addField(`Imput`, `\`\`\`js
+      ${toeval.join(" ")}\`\`\``)
+            .addField(`Output`, `\`\`\`js
+      ${out}\`\`\``)
+            .setColor(65280);
+
+        message.channel.send({embed: Evaled}).then(m => {
+let response = m.createdTimestamp - message.createdTimestamp
+m.edit(`**Evaled in: ${response}ms**`)})
       
-      
-    message.channel.send({embed: {
-      title: "**Evaluated:**:white_check_mark:",
-      "color": 65280,
-      "fields": [
-      {
-      "name": "Input:",
-      "value": `\`\`\`js
-      ${toeval.join(" ")}\`\`\``
-      },
-      {
-      "name": "Output:",
-      "value": `\`\`\`js
-      ${out}\`\`\``
-      },
-           ]
-    }});
+    
     }).catch(e => {
     e = e.toString();
 
     //`:x:**Error:**\n\`\`\`${e}\`\`\``//
-    message.channel.send({embed: {
-      title: ":x:Error",
-      "color": 16711680,
-      "fields": [
-      {
-      "name": "Input:",
-      "value": `\`\`\`js
-      ${toeval.join(" ")}\`\`\``
-      },
-      {
-      "name": "Output",
-      "value": `\`\`\`js
-      ${e}\`\`\``
-      },
-          ]
-    }})
+      
+      
+      const Errored = new Discord.RichEmbed()
+            .setTitle(":x:Error")
+            .addField(`Imput`, `\`\`\`js
+      ${toeval.join(" ")}\`\`\``)
+            .addField(`Output`, `\`\`\`js
+      ${e}\`\`\``)
+            .setColor(16711680);
+
+        message.channel.send({embed: Errored}).then(m => {
+let response = m.createdTimestamp - message.createdTimestamp
+m.edit(`**Evaled in: ${response}ms**`)})
   })
   
   
