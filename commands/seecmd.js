@@ -63,7 +63,7 @@ module.exports = async function(client, message, cmd, args, prefix) {
         evaled = evaled.toString();
 
         if (evaled.length >= 2000) {
-          message.reply(`Output was longer than 2000 characters (${evaled.length} to be exact!) You can find it in the console.`);
+          msg.edit(`${message.author}, Output was longer than 2000 characters (${evaled.length} to be exact!) You can find it in the console.`);
           return console.log(evaled);
         }
 
