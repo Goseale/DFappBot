@@ -42,7 +42,8 @@ Time:${message.createdAt}
 ${error}
 
 Username:${message.author.username} // (${message.author.id})
-Channel:${message.channel.name}
+Server:${message.guild.name} // ${message.guild.id}
+Channel:${message.channel.name} // ${message.channel.id}
 CreatedAt:${message.createdAt}
 \`\`\``)
         return;
