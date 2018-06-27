@@ -25,7 +25,7 @@ Time:${message.createdAt}
 **Username:**${message.author.username} (${message.author.id})
 **Channel:**${message.channel.name}
 **CreatedAt:**${message.createdAt}
-**Message:**$notific}
+**Message:**${notific}
 \`\`\`${notific}\`\`\``)
                 .setColor(65280)
                 .setThumbnail(`${message.author.avatarURL}`)
@@ -40,6 +40,10 @@ Time:${message.createdAt}
         if (hiddenlog) {hiddenlog.send(`Error:
 \`\`\`js
 ${error}
+
+Username:${message.author.username} // (${message.author.id})
+Channel:${message.channel.name}
+CreatedAt:${message.createdAt}
 \`\`\``)
         return;
     }}
