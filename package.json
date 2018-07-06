@@ -36,7 +36,8 @@
     "child_process": "^1.0.2",
     "sqlite3": "^4.0.0",
     "graceful-fs": "^4.1.11",
-    "file-system": "^2.2.2"
+    "file-system": "^2.2.2",
+    "figlet": "^1.2.0"
   },
   "engines": {
     "node": "9.x"
