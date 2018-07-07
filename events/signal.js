@@ -20,4 +20,5 @@ function handle(signal) {
 
 process.on('SIGINT', handle);
 process.on('SIGTERM', handle);
-  }
+  
+  }}
