@@ -6,7 +6,7 @@ function handle(signal) {
   console.log(" ")
   console.log(`Received ${signal}`);
   console.log(" ")
-  if (hiddenlog) hiddenlog.send(`Received ${signal}`)
+  if (hiddenlog) hiddenlog.send(`Received ${signal}\nClient has been terminated.`)
   client.destroy()
 }
 
