@@ -1,12 +1,12 @@
 module.exports = {
   async main(client) {
 
-
+let hiddenlog = client.channels.get(`357596301522632715`);
 function handle(signal) {
   console.log(" ")
   console.log(`Received ${signal}`);
   console.log(" ")
-  client
+  if (hiddenlog) hiddenlog.send(`Received ${signal}`)
   client.destroy()
 }
 
