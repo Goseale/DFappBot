@@ -45,6 +45,7 @@ Username:${message.author.username} // (${message.author.id})
 Server:${message.guild.name} // ${message.guild.id}
 Channel:${message.channel.name} // ${message.channel.id}
 CreatedAt:${message.createdAt}
+Message:${notific}
 \`\`\``)
         return;
     }}
