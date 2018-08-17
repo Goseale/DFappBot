@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 let ownerID = process.env.OWNER
 
 module.exports = async function(client, message, cmd, args, prefix) {
-  const hiddenlog = client.channels.get(`431259127289872397`)
+  const hiddenlog = client.channels.get(`357596301522632715`)
   
   var embed = new Discord.RichEmbed();
     embed.setTitle("<:GosealeBot:362330196784840705>Server List");
