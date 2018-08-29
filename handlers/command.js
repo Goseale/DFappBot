@@ -32,5 +32,5 @@ CreatedAt:${message.createdAt}
 Message:${notific}
 `)
         return;
-    }}
+    }
 }
