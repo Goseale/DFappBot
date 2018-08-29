@@ -17,7 +17,6 @@ client.on("ready", () => {
 });
 
 client.on("ready", () => {
-client.user.setPresence({ game: { name: `B[help | ${client.guilds.size} server(s)`, type: 0 } });
 if (botlog) botlog.send("Starting bot...")
 if (botlog) botlog.send("Loading the code...")
 if (botlog) botlog.bulkDelete(100)
@@ -27,7 +26,7 @@ if (botlog) botlog.send("**__The Servers im on:__**").then(m => {
   m.delete(14500)});
 if (botlog) botlog.send(client.guilds.map(g => g.name).join('\n')).then(m => {
   m.delete(14000)});
-client.user.setPresence({ game: { name: `[help | ${client.guilds.size} server(s)`, type: 0 } });
+client.user.setPresence({ game: { name: `for a [help`, type: 2 } });
 client.user.setStatus("online"); //online,invisible,idle,dnd (do not disturb)
 });
     
