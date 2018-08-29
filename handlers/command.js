@@ -6,8 +6,6 @@ const Discord = require('discord.js');
     try {
         Command = require(`../commands/${cmd}.js`);
         
-      
-        if (hiddenlog) {
           
          
           console.log(`
@@ -19,26 +17,12 @@ Channel:${message.channel.name}
 Message:${notific}
 Time:${message.createdAt}
 - - - - - - - - - - - - - - - - - -`)
-                let richEmbed = new Discord.RichEmbed()
-                .setTitle(`Message log`)
-                .setDescription(`**Server:**${message.guild.name}
-**Username:**${message.author.username} (${message.author.id})
-**Channel:**${message.channel.name}
-**CreatedAt:**${message.createdAt}
-**Message:**${notific}
-\`\`\`${notific}\`\`\``)
-                .setColor(65280)
-                .setThumbnail(`${message.author.avatarURL}`)
-                if (hiddenlog) hiddenlog.send({embed: richEmbed});
           
-          
-        }
       
       
         Command(client, message, cmd, args, prefix)
     } catch(error) {
-        if (hiddenlog) {hiddenlog.send(`Error:
-\`\`\`js
+        console.log(`
 ${error}
 
 Username:${message.author.username} // (${message.author.id})
@@ -46,7 +30,7 @@ Server:${message.guild.name} // ${message.guild.id}
 Channel:${message.channel.name} // ${message.channel.id}
 CreatedAt:${message.createdAt}
 Message:${notific}
-\`\`\``)
+`)
         return;
     }}
 }
