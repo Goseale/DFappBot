@@ -10,8 +10,6 @@ const guildTimers = new Discord.Collection()
 
 const Ready = require('./events/ready.js');
 const message = require("./events/message.js");
-const GuildMemberAdd = require('./events/guildAddBot.js');
-const GuildMemberRemove = require('./events/guildRemoveBot.js');
 const EvMessage = require("./events/message.js")
 const SIG = require("./events/signal.js")
 const prefix = "["
@@ -82,8 +80,6 @@ ${err.stack}
 
 
 Ready.main(client, config);
-GuildMemberAdd.main(client, Discord, hiddenlog);
-GuildMemberRemove.main(client, Discord, hiddenlog);
 EvMessage.main(client, prefix);
 SIG.main(client)
 
