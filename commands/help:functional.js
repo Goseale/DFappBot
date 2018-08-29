@@ -1,6 +1,5 @@
 module.exports = async function(client, message, cmd, args) {
     message.channel.send(`\`\`\`html
-<suggest>         Suggest features to the bot
 <timer>           Set a timer
 <rng>             Generates a number
 <math>            Do math
