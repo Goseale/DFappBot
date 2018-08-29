@@ -4,7 +4,6 @@ const client = new Discord.Client();
 
 //Vars1
 const config = require("./config.json");
-const settings = require("./settings.json");
 const guildTimers = new Discord.Collection()
 
 //var2
