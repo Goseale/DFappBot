@@ -7,6 +7,6 @@ module.exports = async function(client, message, cmd, args) {
 <help:fun>               Fun commands
 <help:functional>        Commands that are be usefull
 
-<Bot_version:>           2.0 The code rework
+<Bot_version:>           1.0.6 A fresh start
 \`\`\``)
 }
